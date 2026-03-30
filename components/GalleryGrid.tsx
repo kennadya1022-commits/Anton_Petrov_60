@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { withBasePath } from "@/lib/withBasePath";
 
 type GalleryImage = {
@@ -71,6 +71,8 @@ function FallbackThumbImage({
 }
 
 export default function GalleryGrid({ images, showNumbers = false }: GalleryGridProps) {
+  const gridVideoRefs = useRef<HTMLVideoElement[]>([]);
+  const lightboxVideoRef = useRef<HTMLVideoElement | null>(null);
   const mediaItems = useMemo(
     () =>
       images.map((img) => ({
@@ -136,6 +138,50 @@ export default function GalleryGrid({ images, showNumbers = false }: GalleryGrid
     setLightboxCandidateIndex(0);
   }, [lightboxItem?.id]);
 
+  const pauseAllGridVideos = () => {
+    gridVideoRefs.current.forEach((video) => {
+      if (!video) return;
+      video.pause();
+    });
+  };
+
+  const closeLightbox = () => {
+    lightboxVideoRef.current?.pause();
+    pauseAllGridVideos();
+    setLightboxIndex(null);
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) return;
+          const video = entry.target as HTMLVideoElement;
+          video.pause();
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    gridVideoRefs.current.forEach((video) => {
+      if (video) observer.observe(video);
+    });
+
+    return () => observer.disconnect();
+  }, [images]);
+
+  useEffect(() => {
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        lightboxVideoRef.current?.pause();
+        pauseAllGridVideos();
+      }
+    };
+
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", onVisibilityChange);
+  }, []);
+
   return (
     <>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 lg:grid-cols-4">
@@ -163,6 +209,9 @@ export default function GalleryGrid({ images, showNumbers = false }: GalleryGrid
                 </span>
               )}
               <video
+                ref={(node) => {
+                  if (node) gridVideoRefs.current[index] = node;
+                }}
                 className="h-full w-full object-cover"
                 controls
                 playsInline
@@ -198,12 +247,12 @@ export default function GalleryGrid({ images, showNumbers = false }: GalleryGrid
           role="dialog"
           aria-modal="true"
           aria-label="Просмотр медиа"
-          onClick={() => setLightboxIndex(null)}
+          onClick={closeLightbox}
         >
           <button
             type="button"
             className="absolute right-4 top-4 rounded-full bg-black/55 p-2.5 text-white hover:bg-black/80 shadow-lg transition-colors"
-            onClick={() => setLightboxIndex(null)}
+            onClick={closeLightbox}
             aria-label="Закрыть"
           >
             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -240,6 +289,7 @@ export default function GalleryGrid({ images, showNumbers = false }: GalleryGrid
           >
             {lightboxItem.type === "video" ? (
               <video
+                ref={lightboxVideoRef}
                 className="max-h-[80vh] w-auto max-w-full rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.65)] memory-modal-enter"
                 controls
                 playsInline

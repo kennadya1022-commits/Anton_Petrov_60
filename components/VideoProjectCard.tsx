@@ -22,6 +22,24 @@ export default function VideoProjectCard() {
     });
   }, [fullscreen]);
 
+  const closeFullscreen = () => {
+    fullscreenVideoRef.current?.pause();
+    videoRef.current?.pause();
+    setFullscreen(false);
+  };
+
+  useEffect(() => {
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        fullscreenVideoRef.current?.pause();
+        videoRef.current?.pause();
+      }
+    };
+
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", onVisibilityChange);
+  }, []);
+
   return (
     <>
       <button
@@ -58,12 +76,12 @@ export default function VideoProjectCard() {
           role="dialog"
           aria-modal="true"
           aria-label="Просмотр видео"
-          onClick={() => setFullscreen(false)}
+          onClick={closeFullscreen}
         >
           <button
             type="button"
             className="absolute right-4 top-4 z-10 rounded-full bg-white/10 p-2 text-white hover:bg-white/20"
-            onClick={() => setFullscreen(false)}
+            onClick={closeFullscreen}
             aria-label="Закрыть"
           >
             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

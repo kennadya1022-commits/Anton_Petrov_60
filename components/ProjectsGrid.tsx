@@ -102,6 +102,12 @@ export default function ProjectsGrid({ items }: ProjectsGridProps) {
     setOpenVideo(null);
   };
 
+  useEffect(() => {
+    return () => {
+      videoRef.current?.pause();
+    };
+  }, []);
+
   return (
     <>
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
