@@ -10,6 +10,7 @@ const sections = [
   { id: "family", label: "Family" },
   { id: "lessons", label: "60 Lessons" },
   { id: "gallery", label: "Memories" },
+  { id: "congratulations", label: "Поздравления" },
   { id: "happy-birthday", label: "Happy Birthday" },
 ];
 

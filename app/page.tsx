@@ -5,12 +5,14 @@ import GalleryGrid from "@/components/GalleryGrid";
 import ProjectsGrid from "@/components/ProjectsGrid";
 import PersonLessonCard from "@/components/PersonLessonCard";
 import MusicCard from "@/components/MusicCard";
+import WishesSection from "@/components/WishesSection";
 import { biographyNarrative } from "@/data/biography";
 import { getProjectMedia } from "@/data/projectMedia";
 import { galleryImages } from "@/data/gallery";
 import { personLessons } from "@/data/lessons";
 import musicFromImages from "@/data/musicFromImages.json";
 import { familyImages } from "@/data/familyImages";
+import { wishesText, wishesVideo } from "@/data/wishes";
 
 export default function Home() {
   return (
@@ -141,6 +143,9 @@ export default function Home() {
       </section>
 
       {/* 8. Happy Birthday */}
+      <WishesSection textItems={wishesText} videoItems={wishesVideo} />
+
+      {/* 9. Happy Birthday */}
       <section id="happy-birthday" className="scroll-mt-20 border-t border-[var(--border)]">
         <div className="mx-auto max-w-2xl px-4 py-20 sm:px-6 sm:py-28">
           <h2 className="text-center text-3xl font-light tracking-tight text-[var(--foreground)] sm:text-4xl">
