@@ -19,6 +19,55 @@ type GalleryGridProps = {
   showNumbers?: boolean;
 };
 
+function buildImageCandidates(src: string): string[] {
+  const extMatch = src.match(/\.[^/.]+$/);
+  if (!extMatch) return [src];
+
+  const base = src.slice(0, -extMatch[0].length);
+  const candidates = [
+    src,
+    `${base}.webp`,
+    `${base}.jpg`,
+    `${base}.jpeg`,
+    `${base}.png`,
+    `${base}.JPG`,
+    `${base}.PNG`,
+    `${base} (1).webp`,
+  ];
+
+  return Array.from(new Set(candidates));
+}
+
+function FallbackThumbImage({
+  src,
+  alt,
+}: {
+  src: string;
+  alt: string;
+}) {
+  const candidates = useMemo(() => buildImageCandidates(src), [src]);
+  const [candidateIndex, setCandidateIndex] = useState(0);
+
+  useEffect(() => {
+    setCandidateIndex(0);
+  }, [src]);
+
+  const currentSrc = candidates[Math.min(candidateIndex, candidates.length - 1)];
+
+  return (
+    <Image
+      src={currentSrc}
+      alt={alt}
+      fill
+      className="object-cover transition-transform group-hover:scale-105"
+      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+      onError={() => {
+        setCandidateIndex((prev) => Math.min(prev + 1, candidates.length - 1));
+      }}
+    />
+  );
+}
+
 export default function GalleryGrid({ images, showNumbers = false }: GalleryGridProps) {
   const mediaItems = useMemo(
     () =>
@@ -72,6 +121,18 @@ export default function GalleryGrid({ images, showNumbers = false }: GalleryGrid
   };
 
   const lightboxItem = lightboxIndex !== null ? mediaItems[lightboxIndex] : null;
+  const lightboxImageCandidates = useMemo(
+    () =>
+      lightboxItem && lightboxItem.type === "image"
+        ? buildImageCandidates(lightboxItem.src)
+        : [],
+    [lightboxItem]
+  );
+  const [lightboxCandidateIndex, setLightboxCandidateIndex] = useState(0);
+
+  useEffect(() => {
+    setLightboxCandidateIndex(0);
+  }, [lightboxItem?.id]);
 
   return (
     <>
@@ -123,13 +184,7 @@ export default function GalleryGrid({ images, showNumbers = false }: GalleryGrid
                   {index + 1}
                 </span>
               )}
-              <Image
-                src={img.src}
-                alt={img.caption ?? img.title}
-                fill
-                className="object-cover transition-transform group-hover:scale-105"
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              />
+              <FallbackThumbImage src={img.src} alt={img.caption ?? img.title} />
             </button>
           )
         )}
@@ -192,11 +247,20 @@ export default function GalleryGrid({ images, showNumbers = false }: GalleryGrid
               </video>
             ) : (
               <Image
-                src={lightboxItem.src}
+                src={
+                  lightboxImageCandidates[
+                    Math.min(lightboxCandidateIndex, Math.max(lightboxImageCandidates.length - 1, 0))
+                  ] ?? lightboxItem.src
+                }
                 alt={lightboxItem.caption ?? lightboxItem.title}
                 width={800}
                 height={600}
                 className="max-h-[80vh] w-auto rounded-2xl object-contain shadow-[0_20px_60px_rgba(0,0,0,0.65)] memory-modal-enter"
+                onError={() => {
+                  setLightboxCandidateIndex((prev) =>
+                    Math.min(prev + 1, Math.max(lightboxImageCandidates.length - 1, 0))
+                  );
+                }}
               />
             )}
             <p className="mt-4 text-center text-sm sm:text-base font-light text-white/80">
