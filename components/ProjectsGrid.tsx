@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import type { ProjectMediaItem, ProjectImageItem, ProjectVideoItem } from "@/data/projectMedia";
+import { withBasePath } from "@/lib/withBasePath";
 
 type ProjectsGridProps = {
   items: ProjectMediaItem[];
@@ -26,7 +27,7 @@ function ImageCard({
     >
       <div className="relative w-full overflow-hidden rounded-t-2xl bg-[var(--accent-soft)]/20 aspect-[4/5]">
         <Image
-          src={item.src}
+          src={withBasePath(item.src)}
           alt={item.title}
           fill
           className="object-contain"
@@ -60,7 +61,7 @@ function VideoCard({
     >
       <div className="relative w-full overflow-hidden rounded-t-2xl bg-[var(--accent-soft)]/20 aspect-[4/5]">
         <video
-          src={item.src}
+          src={withBasePath(item.src)}
           className="h-full w-full object-cover"
           preload="metadata"
           muted
@@ -145,7 +146,7 @@ export default function ProjectsGrid({ items }: ProjectsGridProps) {
             onClick={(e) => e.stopPropagation()}
           >
             <Image
-              src={lightboxImage.src}
+              src={withBasePath(lightboxImage.src)}
               alt={lightboxImage.title}
               width={800}
               height={600}
@@ -187,7 +188,7 @@ export default function ProjectsGrid({ items }: ProjectsGridProps) {
               className="aspect-video max-h-[90vh] w-full rounded-lg object-contain"
               onClick={(e) => e.stopPropagation()}
             >
-              <source src={openVideo.src} type="video/mp4" />
+              <source src={withBasePath(openVideo.src)} type="video/mp4" />
             </video>
           </div>
         </div>

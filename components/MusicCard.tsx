@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { withBasePath } from "@/lib/withBasePath";
 
 type MusicCardProps = {
   title: string;
@@ -10,7 +11,7 @@ export default function MusicCard({ title, src }: MusicCardProps) {
     <article className="group overflow-hidden rounded-2xl glass transition-shadow hover:shadow-[var(--glow)]">
       <div className="relative aspect-square w-full overflow-hidden bg-[var(--accent-soft)]/20">
         <Image
-          src={src}
+          src={withBasePath(src)}
           alt={title}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"

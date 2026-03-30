@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { withBasePath } from "@/lib/withBasePath";
 
 type HeroProps = {
   title: string;
@@ -23,7 +24,7 @@ export default function Hero({
         {imageSrc ? (
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl glass md:max-w-md">
             <Image
-              src={imageSrc}
+              src={withBasePath(imageSrc)}
               alt={imageAlt}
               fill
               className="object-cover"

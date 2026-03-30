@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect, useMemo } from "react";
+import { withBasePath } from "@/lib/withBasePath";
 
 type GalleryImage = {
   id: string;
@@ -20,12 +21,13 @@ type GalleryGridProps = {
 };
 
 function buildImageCandidates(src: string): string[] {
-  const extMatch = src.match(/\.[^/.]+$/);
-  if (!extMatch) return [src];
+  const normalizedSrc = withBasePath(src);
+  const extMatch = normalizedSrc.match(/\.[^/.]+$/);
+  if (!extMatch) return [normalizedSrc];
 
-  const base = src.slice(0, -extMatch[0].length);
+  const base = normalizedSrc.slice(0, -extMatch[0].length);
   const candidates = [
-    src,
+    normalizedSrc,
     `${base}.webp`,
     `${base}.jpg`,
     `${base}.jpeg`,
@@ -166,7 +168,7 @@ export default function GalleryGrid({ images, showNumbers = false }: GalleryGrid
                 playsInline
                 preload="metadata"
               >
-                <source src={img.videoSrc ?? img.src} type="video/mp4" />
+                <source src={withBasePath(img.videoSrc ?? img.src)} type="video/mp4" />
               </video>
             </div>
           ) : (
@@ -243,7 +245,7 @@ export default function GalleryGrid({ images, showNumbers = false }: GalleryGrid
                 playsInline
                 preload="metadata"
               >
-                <source src={lightboxItem.src} type="video/mp4" />
+                <source src={withBasePath(lightboxItem.src)} type="video/mp4" />
               </video>
             ) : (
               <Image

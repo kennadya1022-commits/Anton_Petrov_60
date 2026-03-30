@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { withBasePath } from "@/lib/withBasePath";
 
 const VIDEO_SRC = "/videos/reel.mp4";
 
@@ -31,7 +32,7 @@ export default function VideoProjectCard() {
         <div className="relative w-full overflow-hidden rounded-t-2xl bg-[var(--accent-soft)]/20 aspect-[4/5]">
           <video
             ref={videoRef}
-            src={VIDEO_SRC}
+            src={withBasePath(VIDEO_SRC)}
             className="h-full w-full object-cover"
             preload="metadata"
             muted
@@ -83,7 +84,7 @@ export default function VideoProjectCard() {
               onError={() => setError("Не удалось загрузить видео")}
               onLoadedData={() => setError(null)}
             >
-              <source src={VIDEO_SRC} type="video/mp4" />
+              <source src={withBasePath(VIDEO_SRC)} type="video/mp4" />
               Ваш браузер не поддерживает воспроизведение видео.
             </video>
             {error && (

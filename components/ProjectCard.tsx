@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { withBasePath } from "@/lib/withBasePath";
 
 type ProjectCardProps = {
   title: string;
@@ -17,7 +18,7 @@ export default function ProjectCard({ title, year, src, hideLabel }: ProjectCard
         className="relative w-full overflow-hidden rounded-t-2xl bg-[var(--accent-soft)]/20 aspect-[4/5]"
       >
         <Image
-          src={src}
+          src={withBasePath(src)}
           alt={title}
           fill
           className="object-contain"
