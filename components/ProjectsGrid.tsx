@@ -22,7 +22,7 @@ function ImageCard({
     <button
       type="button"
       onClick={onClick}
-      className="flex flex-col overflow-hidden rounded-2xl glass text-left transition-shadow hover:shadow-[var(--glow)]"
+      className="flex w-full flex-col overflow-hidden rounded-2xl glass text-left transition-shadow hover:shadow-[var(--glow)]"
     >
       <div className="relative w-full overflow-hidden rounded-t-2xl bg-[var(--accent-soft)]/20 aspect-[4/5]">
         <Image
@@ -56,7 +56,7 @@ function VideoCard({
     <button
       type="button"
       onClick={onClick}
-      className="group flex flex-col overflow-hidden rounded-2xl glass text-left transition-shadow hover:shadow-[var(--glow)]"
+      className="group flex w-full flex-col overflow-hidden rounded-2xl glass text-left transition-shadow hover:shadow-[var(--glow)]"
     >
       <div className="relative w-full overflow-hidden rounded-t-2xl bg-[var(--accent-soft)]/20 aspect-[4/5]">
         <video
@@ -103,7 +103,7 @@ export default function ProjectsGrid({ items }: ProjectsGridProps) {
 
   return (
     <>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4">
         {items.map((item) =>
           item.type === "image" ? (
             <ImageCard
@@ -175,7 +175,7 @@ export default function ProjectsGrid({ items }: ProjectsGridProps) {
             </svg>
           </button>
           <div
-            className="relative max-h-full max-w-full"
+            className="relative w-full max-w-4xl"
             onClick={(e) => e.stopPropagation()}
           >
             <video
@@ -184,7 +184,7 @@ export default function ProjectsGrid({ items }: ProjectsGridProps) {
               controls
               preload="auto"
               playsInline
-              className="max-h-[90vh] w-auto max-w-full rounded-lg"
+              className="aspect-video max-h-[90vh] w-full rounded-lg object-contain"
               onClick={(e) => e.stopPropagation()}
             >
               <source src={openVideo.src} type="video/mp4" />

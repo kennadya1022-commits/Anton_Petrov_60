@@ -16,15 +16,15 @@ export default function Home() {
   return (
     <>
       {/* 1. Home */}
-      <section id="home" className="flex min-h-[72vh] flex-col items-center justify-center px-4 pt-16 pb-16 sm:px-6 sm:pt-20 sm:pb-20 bg-gradient-to-b from-white via-[#f7fbff] to-white">
-        <div className="mx-auto max-w-2xl text-center">
+      <section id="home" className="flex min-h-[72vh] flex-col items-center justify-center bg-gradient-to-b from-white via-[#f7fbff] to-white px-4 pb-14 pt-14 sm:px-6 sm:pb-20 sm:pt-20">
+        <div className="mx-auto w-full max-w-2xl text-center">
           <p className="hero-fade-1 text-sm font-light tracking-wide text-[var(--foreground)]/70 sm:text-base">
             Anton Petrov
           </p>
-          <h1 className="hero-fade-2 mt-5 text-4xl font-extralight tracking-[0.04em] text-[var(--foreground)] sm:text-[2.9rem] md:text-[3.6rem]">
+          <h1 className="hero-fade-2 mt-4 text-3xl font-extralight tracking-[0.04em] text-[var(--foreground)] sm:mt-5 sm:text-[2.9rem] md:text-[3.6rem]">
             The Story of Our Dad
           </h1>
-          <p className="hero-fade-3 mt-3 text-sm font-light text-[var(--foreground)]/55 sm:text-base">
+          <p className="hero-fade-3 mt-2 text-xs font-light text-[var(--foreground)]/55 sm:mt-3 sm:text-base">
             (son · husband · brother · friend)
           </p>
           <p className="hero-fade-4 mt-8 text-lg font-light tracking-wide text-[var(--accent)] sm:text-xl">
@@ -35,7 +35,7 @@ export default function Home() {
           </p>
           <a
             href="#biography"
-            className="hero-fade-6 btn-glass mt-10 inline-block text-xl sm:text-2xl border-2 border-[var(--accent)] bg-[var(--accent-soft)]/40 px-16 py-6 sm:px-20 sm:py-7 font-medium shadow-[var(--glow)] hover:bg-[var(--accent-soft)]/60 rounded-[48px] transition-all duration-200 ease-out hover:scale-[1.02]"
+            className="hero-fade-6 btn-glass mt-8 inline-flex w-full justify-center rounded-[40px] border-2 border-[var(--accent)] bg-[var(--accent-soft)]/40 px-6 py-4 text-lg font-medium shadow-[var(--glow)] transition-all duration-200 ease-out hover:scale-[1.02] hover:bg-[var(--accent-soft)]/60 sm:mt-10 sm:w-auto sm:rounded-[48px] sm:px-20 sm:py-7 sm:text-2xl"
           >
             Начать путешествие
           </a>
@@ -53,9 +53,9 @@ export default function Home() {
             imageSrc="/images/about-hero.png"
             imageAlt="Антон Петров в детстве"
           />
-          <div className="mx-auto max-w-5xl px-4 pb-12 sm:px-6">
-            <div className="glass rounded-2xl p-6 sm:p-10">
-              <p className="whitespace-pre-line text-lg font-light leading-relaxed text-[var(--foreground)]/90">
+          <div className="mx-auto max-w-5xl px-4 pb-10 sm:px-6 sm:pb-12">
+            <div className="glass rounded-2xl p-5 sm:p-10">
+              <p className="whitespace-pre-line text-base font-light leading-8 text-[var(--foreground)]/90 sm:text-lg sm:leading-relaxed">
                 {biographyNarrative}
               </p>
             </div>
@@ -96,7 +96,7 @@ export default function Home() {
             title="Family"
             subtitle="Один из важных проектов в его жизни — семья."
           />
-          <p className="mb-10 font-light text-[var(--accent)]">
+          <p className="mb-8 max-w-4xl text-base font-light leading-8 text-[var(--accent)] sm:mb-10 sm:text-lg">
             Он воспитал пятерых детей.
             <br />
             Внимательный и заботливый, всегда придет на помощь, знает всё на свете и научит словом или своим примером.
@@ -146,7 +146,7 @@ export default function Home() {
           <h2 className="text-center text-3xl font-light tracking-tight text-[var(--foreground)] sm:text-4xl">
             Happy Birthday
           </h2>
-          <div className="mt-14 space-y-6 text-center text-lg font-light leading-relaxed text-[var(--foreground)]/90">
+          <div className="mt-10 space-y-6 text-center text-base font-light leading-8 text-[var(--foreground)]/90 sm:mt-14 sm:text-lg sm:leading-relaxed">
             <p>Папа, мы все тебя очень любим и ценим!</p>
             <p>
               Мы очень благодарны тебе за всё, что ты для нас делаешь.<br />
@@ -163,7 +163,7 @@ export default function Home() {
               ведь именно в них оно и живёт.
             </p>
           </div>
-          <blockquote className="relative mt-16 mx-auto max-w-lg overflow-hidden rounded-2xl border border-[var(--glass-border)] bg-[var(--accent-soft)]/12 py-12 px-8 sm:py-14 sm:px-12 shadow-[var(--shadow)] backdrop-blur-[8px]">
+          <blockquote className="relative mx-auto mt-12 max-w-lg overflow-hidden rounded-2xl border border-[var(--glass-border)] bg-[var(--accent-soft)]/12 px-5 py-10 shadow-[var(--shadow)] backdrop-blur-[8px] sm:mt-16 sm:px-12 sm:py-14">
             <div className="flex flex-col items-center gap-6">
               <p className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center">
                 <span aria-hidden className="quote-serif text-2xl sm:text-3xl font-normal text-[var(--accent)]/80 leading-none select-none">
