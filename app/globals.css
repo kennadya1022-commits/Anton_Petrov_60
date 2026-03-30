@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8fbff;
+  --foreground: #0a0a0a;
+  --accent: #7dd3fc;
+  --accent-soft: #e0f2fe;
+  --glass: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(125, 211, 252, 0.35);
+  --border: rgba(125, 211, 252, 0.2);
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+  --glow: 0 0 28px rgba(125, 211, 252, 0.25);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-weight: 300;
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow);
+}
+
+.btn-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.875rem 2rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--foreground);
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: 9999px;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.btn-glass:hover {
+  border-color: var(--accent);
+  box-shadow: var(--glow);
+  background: rgba(255, 255, 255, 0.4);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+.quote-serif {
+  font-family: var(--font-quote), Georgia, "Times New Roman", serif;
+}
+
+/* Hero staggered entrance helpers */
+.hero-fade-1 {
+  opacity: 0;
+  animation: fade-in 380ms ease-out forwards;
+  animation-delay: 60ms;
+}
+
+.hero-fade-2 {
+  opacity: 0;
+  animation: fade-in 380ms ease-out forwards;
+  animation-delay: 140ms;
+}
+
+.hero-fade-3 {
+  opacity: 0;
+  animation: fade-in 380ms ease-out forwards;
+  animation-delay: 220ms;
+}
+
+.hero-fade-4 {
+  opacity: 0;
+  animation: fade-in 380ms ease-out forwards;
+  animation-delay: 300ms;
+}
+
+.hero-fade-5 {
+  opacity: 0;
+  animation: fade-in 380ms ease-out forwards;
+  animation-delay: 380ms;
+}
+
+.hero-fade-6 {
+  opacity: 0;
+  animation: fade-in 380ms ease-out forwards;
+  animation-delay: 460ms;
+}
+
+@keyframes memory-fade-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.memory-modal-enter {
+  animation: memory-fade-scale 220ms ease-out;
+}

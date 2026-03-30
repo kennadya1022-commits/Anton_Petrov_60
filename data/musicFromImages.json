@@ -1,0 +1,27 @@
+[
+  {
+    "id": "AC:DC.jpg",
+    "title": "AC:DC",
+    "src": "/images/music/AC:DC.jpg"
+  },
+  {
+    "id": "Pink Floyd \"Dark side of the moon\".jpg",
+    "title": "Pink Floyd \"Dark side of the moon\"",
+    "src": "/images/music/Pink Floyd \"Dark side of the moon\".jpg"
+  },
+  {
+    "id": "Queen.jpeg",
+    "title": "Queen",
+    "src": "/images/music/Queen.jpeg"
+  },
+  {
+    "id": "Simon & Garfunkel - Wednesday Morning 3 AM.png",
+    "title": "Simon & Garfunkel - Wednesday Morning 3 AM",
+    "src": "/images/music/Simon & Garfunkel - Wednesday Morning 3 AM.png"
+  },
+  {
+    "id": "The Rolling Stones.jpg",
+    "title": "The Rolling Stones",
+    "src": "/images/music/The Rolling Stones.jpg"
+  }
+]

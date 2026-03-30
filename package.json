@@ -1,0 +1,30 @@
+{
+  "name": "anton-60",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "npm run projects:generate && npm run music:generate && next build",
+    "export": "npm run build",
+    "start": "next start",
+    "lint": "eslint",
+    "projects:generate": "node scripts/generate-projects.js",
+    "music:generate": "node scripts/generate-music.js"
+  },
+  "dependencies": {
+    "next": "16.1.6",
+    "react": "19.2.3",
+    "react-dom": "19.2.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.1.6",
+    "image-size": "^2.0.2",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
